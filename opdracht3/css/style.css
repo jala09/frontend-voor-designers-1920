@@ -57,8 +57,6 @@ header h1 {
 
 }
 
-
-
 .project {
     width: 15vw;
     flex-shrink: 0;
@@ -76,16 +74,9 @@ header h1 {
     -webkit-filter: grayscale(1);
     /* Webkit Nightlies & Chrome Canary */
     -webkit-transition: all .3s ease-in-out;
-
-
 }
 
-p {
-    padding-top: 10px;
-    color: black;
-    position: relative;
 
-}
 p {
     background-color: black;
     width: 230px;
@@ -99,9 +90,11 @@ p {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-
     z-index: -1;
     color: white;
+    padding-top: 8px;
+
+    position: relative;
 
     @media (max-width: 768px) {
         display: none;
@@ -115,42 +108,22 @@ p {
     filter: none;
     -webkit-filter: grayscale(0);
 
-
 }
 
-.one p:nth-child(3){
-    color:black;
-    width: 30vw;
-    height: 10vh;
-    background-color: aqua;
-    position: absolute;
-    top: -10em;
-    font-size: 1.5em;
-    left: 20vw;
-    z-index: 100;
+.project p:nth-child(3) {
 
-
+visibility: hidden;
+      padding: 2em;
 }
 
 
-
-
-.project:hover > p:nth-child(3){
+.one:hover > p:nth-child(3) {
     visibility: hidden;
 
-
-
-
 }
 
 
-
-
-
-
-
-
-.project:hover > p{
+.project:hover > p {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
@@ -172,7 +145,7 @@ p {
     width: 20vw;
 }
 
-.projecttop.is-dragging .drop {}
+
 
 .drop {
     position: fixed;
@@ -220,27 +193,22 @@ p {
 
 }
 
-.project.is-expanded > p {
-    display: none;
-}
-
-.project.is-expanded > p:nth-child(3) {
+.project.is-expanded >  p:nth-child(3) {
     visibility: visible;
     display: contents;
-    position: absolute;
-
-
+    color: black;
+font-size: 1.3em;
+  padding: 1em;
 
 
 }
 
 .project.is-expanded > img {
     width: 20vw;
-    margin-left: 3vw;
+
+    margin-right: 2em;
 
 }
-
-
 
 .projecttop.is-preview > .project {
     pointer-events: none;
@@ -251,39 +219,22 @@ p {
 }
 
 
-
-
 .projecttop.is-preview > .project.is-expanded {
     opacity: 1;
     transition: .7s;
-
-    width: 100vw;
+    width:80vw;
     height: 100%;
     transform: none !important;
     z-index: 2;
+    display: flex;
+    justify-content: flex-start;
 
 }
+
 
 .project img:hover {
     filter: grayscale(0);
 }
-
-
-
-
-
-
-
-
-/*
-    section{
-    background-color: red;
-    display: flex;
-    justify-content: center;
-
-}
-*/
-
 
 
 
@@ -300,10 +251,6 @@ p {
     align-items: center;
     background-color: pink;
     transition: top 1s ease 1s;
-
-
-    /* approximate max height */
-
 
 }
 

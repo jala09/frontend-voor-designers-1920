@@ -2,8 +2,7 @@
 /*eslint-env browser*/
 /*eslint 'no-console':0*/
 
-//Maak event listener voor loading
-
+//create variable that can be used trought the code
 var header = document.querySelector('section');
 var section1 = document.querySelector('.one');
 var section2 = document.querySelector('.two');
@@ -13,30 +12,23 @@ var section5 = document.querySelector('.five');
 var section6 = document.querySelector('.six');
 var section7 = document.querySelector('.plot1');
 
-
-var requestURL = "https://koopreynders.github.io/frontendvoordesigners/opdracht3/json/movies.json";
-var request = new XMLHttpRequest();
+var requestURL = "https://koopreynders.github.io/frontendvoordesigners/opdracht3/json/movies.json"; //request json url file with the link
+var request = new XMLHttpRequest(); // sends request to get information from json
 request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
+request.responseType = 'json'; // set filetype to json
+request.send(); // send request to servers
 request.onload = function () {
     const Movies = request.response;
     console.log(request.response);
     populateHeader(Movies);
-    //    showMovies(Movies);
 };
 
-
+//function to generate the content from the json file. create new element in section and add content selected from array
 function populateHeader(jsonObj) {
-    //    const myH1 = document.createElement('h1');
-    //    myH1.textContent = jsonObj[0].title;
-    //    header.appendChild(myH1);
-    //
 
     const MyCover1 = document.createElement('img');
     MyCover1.src = jsonObj[0].cover;
     section1.appendChild(MyCover1);
-
 
     const MyCover2 = document.createElement('img');
     MyCover2.src = jsonObj[1].cover;
@@ -82,32 +74,38 @@ function populateHeader(jsonObj) {
     myRelease6.textContent = jsonObj[5].title;
     section6.appendChild(myRelease6);
 
-      const MyPlot1 = document.createElement('p');
+    const MyPlot1 = document.createElement('p');
     MyPlot1.textContent = jsonObj[0].plot;
     section1.appendChild(MyPlot1);
 
+    const MyPlot2 = document.createElement('p');
+    MyPlot2.textContent = jsonObj[1].plot;
+    section2.appendChild(MyPlot2);
 
+    const MyPlot3 = document.createElement('p');
+    MyPlot3.textContent = jsonObj[2].plot;
+    section3.appendChild(MyPlot3);
 
+    const MyPlot4 = document.createElement('p');
+    MyPlot4.textContent = jsonObj[3].plot;
+    section4.appendChild(MyPlot4);
 
+    const MyPlot5 = document.createElement('p');
+    MyPlot5.textContent = jsonObj[4].plot;
+    section5.appendChild(MyPlot5);
 
-
-
-
-
-
+    const MyPlot6 = document.createElement('p');
+    MyPlot6.textContent = jsonObj[5].plot;
+    section6.appendChild(MyPlot6);
 
     //create a event listener for preloader when page is requested
     MyCover1.addEventListener('load', function () {
-        //pakt loader class en
+        //grabs .loader classlist and display aniamtion when the imges are loaded.
         var loader = document.querySelector('.loader');
         loader.classList.add('loader-finish');
-
-
     });
 
-
     header.appendChild(MyCover);
-
     const myPara = document.createElement('p');
     myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
     section.appendChild(myPara);
@@ -115,8 +113,8 @@ function populateHeader(jsonObj) {
 
 }
 
-
-
+//create variables for drag event
+//code src https://codepen.io/knyttneve/pen/XWrVYQB and edited
 const projects = document.querySelectorAll(".project");
 const drop = document.querySelector(".drop");
 const showcase = document.querySelector(".projecttop");
@@ -128,6 +126,8 @@ let start,
     target,
     dropped = false,
     expanded = false;
+
+//create event hadelers staes if and els for difrent steps in interation by using css class list to change the ui states,
 
 const stopped = () => {
     start = false;
@@ -147,26 +147,30 @@ const stopped = () => {
         drop.classList.remove("is-dropped");
         showcase.classList.remove("is-preview");
         target.classList.remove("is-expanded");
-        drop.textContent = "DROP HERE";
+        drop.textContent = "CLICK, HOLD AND DROP HERE TO SEE INFO";
         expanded = false;
     }
 };
 
+//if element is selected and is dragging grab classlist on mouse ui interaction drag and touch.
+
 const started = (e, type) => {
-    start = true;
-    target = e.target;
-    if (type === "touch") {
-        console.log(e.touches[0]);
-        offsetY = target.offsetWidth + target.offsetTop;
-        offsetX = target.offsetWidth + target.offsetLeft;
-    } else {
-        offsetY = e.offsetY + target.offsetTop;
-        offsetX = e.offsetX + target.offsetLeft;
-    }
-    targetRect = target.getBoundingClientRect();
-    target.classList.add("is-selected");
-    showcase.classList.add("is-dragging");
+  start = true;
+  target = e.target;
+  if (type === "touch") {
+    console.log(e.touches[0]);
+    offsetY = target.offsetWidth / 2 + target.offsetTop;
+    offsetX = target.offsetWidth / 2 + target.offsetLeft;
+  } else {
+    offsetY = e.offsetY + target.offsetTop;
+    offsetX = e.offsetX + target.offsetLeft;
+  }
+  targetRect = target.getBoundingClientRect();
+  target.classList.add("is-selected");
+  showcase.classList.add("is-dragging");
 };
+
+//event listeners for mouse and touch selections
 
 projects.forEach(project => {
     project.addEventListener("mousedown", e => {
@@ -239,37 +243,3 @@ drop.addEventListener("click", () => {
 });
 
 
-
-
-//function showMovies(jsonObj) {
-//    const movies = jsonObj['members'];
-//
-//    for (let i = 0; i < movies.length; i++) {
-//        const myArticle = document.createElement('article');
-//        const myH2 = document.createElement('h2');
-//        const myPara1 = document.createElement('p');
-//        const myPara2 = document.createElement('p');
-//        const myPara3 = document.createElement('p');
-//        const myList = document.createElement('ul');
-//
-//        myH2.textContent = movies[i].name;
-//        myPara1.textContent = 'Secret identity: ' + movies[i].secretIdentity;
-//        myPara2.textContent = 'Age: ' + movies[i].age;
-//        myPara3.textContent = 'Superpowers:';
-//
-//        const superPowers = movies[i].powers;
-//        for (let j = 0; j < superPowers.length; j++) {
-//            const listItem = document.createElement('li');
-//            listItem.textContent = superPowers[j];
-//            myList.appendChild(listItem);
-//        }
-//
-//        myArticle.appendChild(myH2);
-//        myArticle.appendChild(myPara1);
-//        myArticle.appendChild(myPara2);
-//        myArticle.appendChild(myPara3);
-//        myArticle.appendChild(myList);
-//
-//        section.appendChild(myArticle);
-//    }
-//}
