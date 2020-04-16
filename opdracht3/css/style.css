@@ -117,10 +117,12 @@ visibility: hidden;
 }
 
 
-.one:hover > p:nth-child(3) {
+
+.project:hover > p:nth-child(3) {
     visibility: hidden;
 
 }
+
 
 
 .project:hover > p {
