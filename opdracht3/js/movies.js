@@ -1,16 +1,21 @@
-//
+/*jslint browser: true, devel: true, eqeq: true, plusplus: true, sloppy: true, vars: true, white: true*/
+/*eslint-env browser*/
+/*eslint 'no-console':0*/
+
 //Maak event listener voor loading
 
-//var header = document.querySelector('section');
+var header = document.querySelector('section');
 var section1 = document.querySelector('.one');
 var section2 = document.querySelector('.two');
 var section3 = document.querySelector('.tree');
 var section4 = document.querySelector('.four');
 var section5 = document.querySelector('.five');
 var section6 = document.querySelector('.six');
+var section7 = document.querySelector('.plot1');
 
-let requestURL = "https://koopreynders.github.io/frontendvoordesigners/opdracht3/json/movies.json";
-let request = new XMLHttpRequest();
+
+var requestURL = "https://koopreynders.github.io/frontendvoordesigners/opdracht3/json/movies.json";
+var request = new XMLHttpRequest();
 request.open('GET', requestURL);
 request.responseType = 'json';
 request.send();
@@ -73,9 +78,16 @@ function populateHeader(jsonObj) {
     myRelease5.textContent = jsonObj[4].title;
     section5.appendChild(myRelease5);
 
-        const myRelease6 = document.createElement('p');
+    const myRelease6 = document.createElement('p');
     myRelease6.textContent = jsonObj[5].title;
     section6.appendChild(myRelease6);
+
+      const MyPlot1 = document.createElement('p');
+    MyPlot1.textContent = jsonObj[0].plot;
+    section1.appendChild(MyPlot1);
+
+
+
 
 
 
@@ -101,7 +113,7 @@ function populateHeader(jsonObj) {
     section.appendChild(myPara);
 
 
-};
+}
 
 
 
@@ -145,8 +157,8 @@ const started = (e, type) => {
     target = e.target;
     if (type === "touch") {
         console.log(e.touches[0]);
-        offsetY = target.offsetWidth / 2 + target.offsetTop;
-        offsetX = target.offsetWidth / 2 + target.offsetLeft;
+        offsetY = target.offsetWidth + target.offsetTop;
+        offsetX = target.offsetWidth + target.offsetLeft;
     } else {
         offsetY = e.offsetY + target.offsetTop;
         offsetX = e.offsetX + target.offsetLeft;
